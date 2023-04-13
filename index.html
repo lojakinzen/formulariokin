@@ -101,14 +101,14 @@ span.required {
 </div>
   
   <script>
-    const form = document.getElementById("kin-form");
+const form = document.getElementById("form");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
-  const dob = document.getElementById("dob").value;
+  const dob = document.getElementById("birthdate").value;
 
   if (!name || !email || !dob) {
     alert("Preencha todos os campos antes de enviar o formulário.");
@@ -147,7 +147,7 @@ form.addEventListener("submit", (event) => {
           parent: { database_id: databaseId },
           properties: {
             "Seu Nome": { title: [{ text: { content: name } }] },
-            "Seu E-mail": { email: email },
+            "Seu E-mail": { email: [{ text: { content: email } }] },
             "Data de Nascimento": { date: { start: dob } },
           },
         }),
@@ -162,14 +162,13 @@ form.addEventListener("submit", (event) => {
         })
         .catch((error) => {
           alert("Ocorreu um erro ao enviar o formulário. Tente novamente mais tarde.");
-          console.error(error);
         });
     })
     .catch((error) => {
       alert("Ocorreu um erro ao enviar o formulário. Tente novamente mais tarde.");
-      console.error(error);
     });
 });
+
 
   </script>
   
