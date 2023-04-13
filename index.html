@@ -112,12 +112,9 @@
       messages.textContent = "Preencha todos os campos antes de enviar o formulário.";
       return;
     }
-    if (!validateEmail(email)) {
-      alert("Por favor, insira um endereço de e-mail válido.");
-      return;
-    }
+
     // Obter o ID do banco de dados do Notion com base em seu nome
-    axios.post("https://cors-anywhere.herokuapp.com/https://api.notion.com/v1/search", {
+    axios.post("https://api.notion.com/v1/search", {
   query: "Calculadora Kinzen DB",
   filter: {
     property: "object",
@@ -134,7 +131,7 @@
   const databaseId = response.data.results[0].id;
   // Criar uma nova página no banco de dados com as informações do formulário
   axios
-    .post(`https://cors-anywhere.herokuapp.com/https://api.notion.com/v1/databases/${databaseId}/pages`, {
+    .post(`https://api.notion.com/v1/databases/${databaseId}/pages`, {
       parent: {
         database_id: databaseId
       },
