@@ -1,175 +1,185 @@
 <head>
-<style>
-  /* Estilos para o formulário */
+  <style>
+    /* Estilos para o formulário */
+    #myForm {
+      max-width: 400px;
+      margin: 0 auto;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #f5f5f5;
+      font-weight: bold;
+      font-size: 13px;
+      font-family: 'Nunito', sans-serif;
+    }
 
-#myForm {
-  max-width: 400px;
-  margin: 0 auto;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
-  background-color: #f5f5f5;
-  font-weight: bold;
-  font-size: 13px;
-  font-family: 'Nunito', sans-serif;
-}
+    /* Estilos para o título do formulário */
+    .form-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-family: 'Nunito', sans-serif;
+    }
 
-/* Estilos para o título do formulário */
-.form-title {
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  font-family: 'Nunito', sans-serif;
-}
+    /* Estilos para as entradas do formulário */
+    .form-group {
+      margin-bottom: 20px;
+      font-family: 'Nunito', sans-serif;
+    }
 
-/* Estilos para as entradas do formulário */
-.form-group {
-  margin-bottom: 20px;
-  font-family: 'Nunito', sans-serif;
-}
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-family: 'Nunito', sans-serif;
+    }
 
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-family: 'Nunito', sans-serif;
-}
+    .form-group input {
+      width: calc(100%);
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-family: 'Nunito', sans-serif;
+    }
 
-.form-group input {
-  width: calc(100%);
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  font-family: 'Nunito', sans-serif;
-}
+    /* Estilos para o botão de envio */
+    .btn-submit {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 17px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 500;
+    }
 
-/* Estilos para o botão de envio */
-.btn-submit {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-  width: 100%;
-  font-size: 17px;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 500;
-}
+    .btn-submit:hover {
+      background-color: #0069d9;
+    }
 
-.btn-submit:hover {
-  background-color: #0069d9;
-}
+    /* Estilos para as mensagens do formulário */
+    .messages {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #007bff;
+      font-family: 'Nunito', sans-serif;
+    }
 
-/* Estilos para as mensagens do formulário */
-.messages {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #007bff;
-  font-family: 'Nunito', sans-serif;
-}
-
-
-span.required {
-  color: red;
-  margin-left: 2px;
-}
-
-</style>
+    span.required {
+      color: red;
+      margin-left: 2px;
+    }
+  </style>
 </head>
 
-
 <body>
-<div id="myForm">
-  <form id="form">
-    <div class="form-group">
-      <label for="birthdate">DATA DE NASCIMENTO<span class="required">*</span></label>
-      <input type="date" id="birthdate" name="birthdate" required>
-    </div>
-    <div class="form-group">
-      <label for="name">SEU NOME<span class="required">*</span></label>
-      <input type="text" id="name" name="name" required>
-    </div>
-    <div class="form-group">
-      <label for="email">SEU E-MAIL<span class="required">*</span></label>
-      <input type="email" id="email" name="email" required>
-    </div>
-    <button type="submit" class="btn-submit">Enviar Formulário</button>
+  <div id="myForm">
+    <form id="form">
+      <div class="form-group">
+        <label for="birthdate">DATA DE NASCIMENTO<span class="required">*</span></label>
+        <input type="date" id="birthdate" name="birthdate" required>
+      </div>
+      <div class="form-group">
+        <label for="name">SEU NOME<span class="required">*</span></label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">SEU E-MAIL<span class="required">*</span></label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <button type="submit" class="btn-submit">Enviar Formulário</button>
+      <div class="messages"></div>
+    </form>
     <div class="messages"></div>
-  </form>
-</div>
-  
-  <script>
-const form = document.getElementById("form");
+  </div>
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
 
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const dob = document.getElementById("birthdate").value;
-
-  if (!name || !email || !dob) {
-    alert("Preencha todos os campos antes de enviar o formulário.");
+  <script src="https://unpkg.com/axios/dist/axios.min.js" crossorigin>
+    const form = document.getElementById("form");
+    const messages = document.querySelector(".messages");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const dob = document.getElementById("birthdate").value;
+      if (!name || !email || !dob) {
+        messages.textContent = "Preencha todos os campos antes de enviar o formulário.";
+        return;
+      }
+      
+      if (!validateEmail(email)) {
+    alert("Por favor, insira um endereço de e-mail válido.");
     return;
   }
-
-  // Obter o ID do banco de dados do Notion com base em seu nome
-  fetch("https://api.notion.com/v1/search", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Notion-Version": "2022-01-27",
-      "Authorization": "Bearer {secret_ii3W4McYnjnCRm2dERw7UgeQKMBWoylvu58DfRYJZcH}",
-    },
-    body: JSON.stringify({
-      query: "Calculadora Kinzen DB",
-      filter: {
-        property: "object",
-        value: "database",
-      },
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const databaseId = data.results[0].id;
-
-      // Criar uma nova página no banco de dados com as informações do formulário
-      fetch(`https://api.notion.com/v1/databases/${databaseId}/pages`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Notion-Version": "2022-01-27",
-          "Authorization": "Bearer {secret_ii3W4McYnjnCRm2dERw7UgeQKMBWoylvu58DfRYJZcH}",
-        },
-        body: JSON.stringify({
-          parent: { database_id: databaseId },
-          properties: {
-            "Seu Nome": { title: [{ text: { content: name } }] },
-            "Seu E-mail": { email: [{ text: { content: email } }] },
-            "Data de Nascimento": { date: { start: dob } },
+      
+      
+      // Obter o ID do banco de dados do Notion com base em seu nome
+      axios
+        .post("https://cors-anywhere.herokuapp.com/https://api.notion.com/v1/search", {
+          query: "Calculadora Kinzen DB",
+          filter: {
+            property: "object",
+            value: "database",
           },
-        }),
-      })
-        .then((response) => {
-          if (response.ok) {
-            alert("Formulário enviado com sucesso!");
-            form.reset();
-          } else {
-            alert("Ocorreu um erro ao enviar o formulário. Tente novamente mais tarde.");
-          }
+        }, {
+          headers: {
+            "Content-Type": "application/json",
+            "Notion-Version": "2022-01-27",
+            "Authorization": "Bearer secret_ii3W4McYnjnCRm2dERw7UgeQKMBWoylvu58DfRYJZcH",
+          },
         })
-        .catch((error) => {
-          alert("Ocorreu um erro ao enviar o formulário. Tente novamente mais tarde.");
+        .then((response) => {
+          const databaseId = response.data.results[0].id;
+          // Criar uma nova página no banco de dados com as informações do formulário
+          axios
+            .post(`https://cors-anywhere.herokuapp.com/https://api.notion.com/v1/databases/${databaseId}/pages`, {
+              parent: {
+                database_id: databaseId
+              },
+              properties: {
+                "Seu Nome": {
+                  title: [{
+                    text: {
+                      content: name
+                    }
+                  }]
+                },
+                "Seu E-mail": {
+                  email: [{
+                    text: {
+                      content: email
+                    }
+                  }]
+                },
+                "Data de Nascimento": {
+                  date: {
+                    start: dob
+                  }
+                },
+              },
+            }, {
+              headers: {
+                "Content-Type": "application/json",
+                "Notion-Version": "2022-01-27",
+                "Authorization": "Bearer secret_ii3W4McYnjnCRm2dERw7UgeQKMBWoylvu58DfRYJZcH",
+              },
+            })
+            .then(() => {
+              form.reset();
+              messages.textContent = "Seu formulário foi enviado com sucesso!";
+            })
+            .catch(() => {
+              messages.textContent = "Ocorreu um erro ao enviar o formulário. Por favor, tente novamente mais tarde.";
+            });
+        })
+        .catch(() => {
+          messages.textContent = "Ocorreu um erro ao enviar o formulário. Por favor, tente novamente mais tarde.";
         });
-    })
-    .catch((error) => {
-      alert("Ocorreu um erro ao enviar o formulário. Tente novamente mais tarde.");
     });
-});
-
-
   </script>
-  
+
 </body>
