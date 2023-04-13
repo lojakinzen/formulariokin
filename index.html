@@ -99,7 +99,7 @@
   </div>
 
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js" crossorigin>
+  <script src="https://unpkg.com/axios/dist/axios.min.js">
     const form = document.getElementById("form");
     const messages = document.querySelector(".messages");
     form.addEventListener("submit", (event) => {
@@ -119,20 +119,18 @@
       
       
       // Obter o ID do banco de dados do Notion com base em seu nome
-      axios
-        .post("https://cors-anywhere.herokuapp.com/https://api.notion.com/v1/search", {
-          query: "Calculadora Kinzen DB",
-          filter: {
-            property: "object",
-            value: "database",
-          },
-        }, {
-          headers: {
-            "Content-Type": "application/json",
-            "Notion-Version": "2022-01-27",
-            "Authorization": "Bearer secret_ii3W4McYnjnCRm2dERw7UgeQKMBWoylvu58DfRYJZcH",
-          },
-        })
+      axios.post("https://cors-anywhere.herokuapp.com/https://api.notion.com/v1/search", {
+  query: "Calculadora Kinzen DB",
+  filter: {
+    property: "object",
+    value: "database",
+  },
+  headers: {
+    "Content-Type": "application/json",
+    "Notion-Version": "2022-01-27",
+    "Authorization": "Bearer secret_ii3W4McYnjnCRm2dERw7UgeQKMBWoylvu58DfRYJZcH",
+  },
+})
         .then((response) => {
           const databaseId = response.data.results[0].id;
           // Criar uma nova página no banco de dados com as informações do formulário
